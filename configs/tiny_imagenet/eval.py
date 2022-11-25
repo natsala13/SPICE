@@ -16,7 +16,7 @@ multiprocessing_distributed = True
 
 data_test = dict(
     type="timagenet_lmdb",
-    lmdb_file='./datasets/tiny_imagenet__lmdb',
+    lmdb_file='./datasets/tiny_imagenet_lmdb',
     meta_info_file='./datasets/tiny_imagenet_lmdb_meta_info.pkl',
     embedding=None,
     shuffle=False,

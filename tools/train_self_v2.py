@@ -97,7 +97,7 @@ def main():
     cfg.distributed = cfg.world_size > 1 or cfg.multiprocessing_distributed
 
     ngpus_per_node = torch.cuda.device_count()
-    if cfg.multiprocessing_distributed:
+    if cfg.multiprocessing_distributed and 0:
         # Since we have ngpus_per_node processes per node, the total world_size
         # needs to be adjusted accordingly
         cfg.world_size = ngpus_per_node * cfg.world_size
@@ -138,6 +138,7 @@ def main_worker(gpu, ngpus_per_node, cfg):
     # create model
     model = Sim2Sem(**cfg.model)
     logger.info(model)
+    import ipdb;ipdb.set_trace()
 
     if cfg.distributed:
         # For multiprocessing distributed, DistributedDataParallel constructor

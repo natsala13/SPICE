@@ -89,10 +89,14 @@ def main():
     model = Sim2Sem(**cfg.model)
     print(model)
 
-    torch.cuda.set_device(cfg.gpu)
-    model = model.cuda(cfg.gpu)
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    state_dict = torch.load(cfg.model.pretrained)
+    # torch.cuda.set_device(cfg.gpu)
+    # model = model.cuda(cfg.gpu)
+
+    model = model.to(device)
+
+    state_dict = torch.load(cfg.model.pretrained, map_location=device)
     for k in list(state_dict.keys()):
         # Initialize the feature module with encoder_q of moco.
         if k.startswith('module.'):
@@ -120,7 +124,7 @@ def main():
     scores_all = []
 
     for _, (images, _, labels, idx) in enumerate(val_loader):
-        images = images.to(cfg.gpu, non_blocking=True)
+        images = images.to(device, non_blocking=True)
         with torch.no_grad():
             scores = model(images, forward_type="sem")
 
