@@ -195,11 +195,11 @@ class SemHead(nn.Module):
         else:
             feature = fea_conv
 
-        cls_score = self.classifier(feature)
+        cls_score, latent_variables = self.classifier(feature)
 
         cls_score = cls_score / self.T
 
-        return cls_score
+        return cls_score, latent_variables
 
     def loss(self, x, target, **kwargs):
         cls_socre = self.forward(x)
