@@ -1,6 +1,6 @@
 model_name = "spice_self"
 # pre_model = "./results/cifar10/moco/checkpoint_0999.pth.tar"
-pre_model = "./results/cifar10/moco_res18_cls/checkpoint_0999.pth.tar"
+pre_model = "./results/cifar10/moco_res18_cls/checkpoint_last.pth.tar"
 embedding = "./results/cifar10/embedding/feas_moco_512_l2.npy"
 resume = "./results/cifar10/{}/checkpoint_last.pth.tar".format(model_name)
 # model_type = "clusterresnet"

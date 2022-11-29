@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 
 class MLP(nn.Module):
-    def __init__(self, num_neurons, drop_out=-1, last_activation=None, return_extra_index=[], batch_norm=False):
+    def __init__(self, num_neurons, drop_out=-1, last_activation=None, return_extra_index=[], batch_norm=False, **kwargs):
         super(MLP, self).__init__()
         num_layer = len(num_neurons) - 1
         for i in range(num_layer):
@@ -25,7 +25,7 @@ class MLP(nn.Module):
 
     def forward(self, x):
         num_layer = self.num_layer
-        outs_extra = []
+        outs_extra = [1, 2]
         for i in range(num_layer):
             layer_name = "lin{}".format(i+1)
             layer = self.__getattr__(layer_name)
@@ -36,13 +36,14 @@ class MLP(nn.Module):
                 bn = self.__getattr__(bn_name)
                 x = bn(x)
 
+            if (i+1) in self.return_extra_index:
+                outs_extra.append(x)
+
             if i < num_layer - 1:
                 if self.drop_out >= 0:
                     x = F.dropout(x, p=self.drop_out, training=self.training)
                 x = F.relu(x, inplace=True)
 
-            if (i+1) in self.return_extra_index:
-                outs_extra.append(x)
 
         if self.last_activation == "relu":
             x = F.relu(x, inplace=True)

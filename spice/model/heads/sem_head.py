@@ -9,7 +9,7 @@ import torch.nn.functional as F
 class SemHead(nn.Module):
     def __init__(self, classifier, feature_conv=None, num_cluster=10, center_ratio=0.5,
                  iter_start=0, iter_up=-1, iter_down=-1, iter_end=0, ratio_start=0.5, ratio_end=0.95, loss_weight=None,
-                 fea_fc=False, T=1, sim_ratio=1, sim_center_ratio=0.9, epoch_merge=5, entropy=False):
+                 fea_fc=False, T=1, sim_ratio=1, sim_center_ratio=0.9, epoch_merge=5, entropy=False, **kwargs):
 
         super(SemHead, self).__init__()
         if loss_weight is None:

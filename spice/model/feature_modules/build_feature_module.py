@@ -7,8 +7,12 @@ from .imagenet import ImageNet, ResNet34
 
 
 def build_feature_module(fea_cfg_ori):
-    fea_cfg = fea_cfg_ori.copy()
-    fea_type = fea_cfg.pop("type")
+    # fea_cfg = fea_cfg_ori.copy()
+    # fea_type = fea_cfg.pop("type")
+
+    fea_cfg = fea_cfg_ori
+    fea_type = fea_cfg['type']
+
     if fea_type == "mlp":
         return MLP(**fea_cfg)
     elif fea_type == "convnet":

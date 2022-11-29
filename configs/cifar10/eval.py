@@ -1,6 +1,7 @@
 model_name = "eval"
 # weight = './model_zoo/self_model_cifar10.pth.tar'
 weight = './results/cifar10/spice_self/checkpoint_best.pth.tar'
+# weight = './models/self_model_cifar10.pth.tar'
 # model_type = "clusterresnet"
 model_type = "resnet18_cifar"
 num_cluster = 10

@@ -94,7 +94,7 @@ class Config(object):
             cfg_dict = mmcv.load(filename)
         else:
             raise IOError('Only py/yml/yaml/json type are supported now!')
-        return Config(cfg_dict, filename=filename)
+        return (Config(cfg_dict, filename=filename))
 
     @staticmethod
     def auto_argparser(description=None):
