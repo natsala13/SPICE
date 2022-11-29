@@ -16,8 +16,8 @@ class SemHeadMulti(nn.Module):
         super(SemHeadMulti, self).__init__()
 
         self.num_heads = len(multi_heads)
-        self.num_cluster = multi_heads[0].num_cluster
-        self.center_ratio = multi_heads[0].center_ratio
+        self.num_cluster = multi_heads[0]['num_cluster']
+        self.center_ratio = multi_heads[0]['center_ratio']
         self.num_neighbor = num_neighbor
         self.ratio_confident = ratio_confident
         self.score_th = score_th
