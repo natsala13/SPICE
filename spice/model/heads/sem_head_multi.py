@@ -92,18 +92,21 @@ class SemHeadMulti(nn.Module):
 
     def forward(self, fea, **kwargs):
         cls_score = []
+
         if isinstance(fea, list):
             assert len(fea) == self.num_heads
 
-        for h in range(self.num_heads):
-            if isinstance(fea, list):
-                cls_socre_h = self.__getattr__("head_{}".format(h)).forward(fea[h])
-            else:
-                cls_socre_h = self.__getattr__("head_{}".format(h)).forward(fea)
+        # for h in range(self.num_heads):
+        #     if isinstance(fea, list):
+        #         cls_score_h, latent_variables = self.__getattr__("head_{}".format(h)).forward(fea[h])
+        #     else:
+        #         cls_score_h, latent_variables = self.__getattr__("head_{}".format(h)).forward(fea)
+        #
+        #     cls_score.append(cls_score_h)
 
-            cls_score.append(cls_socre_h)
+        cls_score, latent_variables = self.__getattr__("head_0").forward(fea[0])
 
-        return cls_score
+        return cls_score, latent_variables
 
     def loss(self, x, target, **kwargs):
         assert len(x) == self.num_heads
