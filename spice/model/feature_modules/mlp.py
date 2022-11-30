@@ -20,8 +20,7 @@ class MLP(nn.Module):
         self.num_layer = num_layer
         self.drop_out = drop_out
         self.last_activation = last_activation
-        self.return_extra_index = return_extra_index
-        print(f'MLP create head - {return_extra_index=}')
+        self.return_extra_index = [1, 2]
         self.batch_norm = batch_norm
 
     def forward(self, x):
