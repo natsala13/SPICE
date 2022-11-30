@@ -21,11 +21,12 @@ class MLP(nn.Module):
         self.drop_out = drop_out
         self.last_activation = last_activation
         self.return_extra_index = return_extra_index
+        print(f'MLP create head - {return_extra_index=}')
         self.batch_norm = batch_norm
 
     def forward(self, x):
         num_layer = self.num_layer
-        outs_extra = [1, 2]
+        outs_extra = []
         for i in range(num_layer):
             layer_name = "lin{}".format(i+1)
             layer = self.__getattr__(layer_name)
@@ -43,7 +44,6 @@ class MLP(nn.Module):
                 if self.drop_out >= 0:
                     x = F.dropout(x, p=self.drop_out, training=self.training)
                 x = F.relu(x, inplace=True)
-
 
         if self.last_activation == "relu":
             x = F.relu(x, inplace=True)
