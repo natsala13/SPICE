@@ -92,6 +92,7 @@ class SemHeadMulti(nn.Module):
 
     def forward(self, fea, **kwargs):
         cls_score = []
+        latent_variables = None
 
         if isinstance(fea, list):
             assert len(fea) == self.num_heads
