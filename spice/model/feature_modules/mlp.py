@@ -37,7 +37,7 @@ class MLP(nn.Module):
                 x = bn(x)
 
             if (i+1) in self.return_extra_index:
-                outs_extra.append(x)
+                outs_extra.append(x)  # TODO: Detach? Copy?
 
             if i < num_layer - 1:
                 if self.drop_out >= 0:
@@ -60,6 +60,6 @@ class MLP(nn.Module):
             assert TypeError
 
         if len(outs_extra) > 0:
-            return [x] + outs_extra
+            return x, outs_extra
         else:
             return x
