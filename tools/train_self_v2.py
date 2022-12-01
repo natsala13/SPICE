@@ -444,7 +444,7 @@ def train(train_loader, model, optimizer, epoch, cfg):
             # Select samples and estimate the ground-truth relationship between samples.
             images_ori_l_batch = images_ori_l_batch.to(cfg.gpu, non_blocking=True)
             with torch.no_grad():
-                scores_nl = model(images_ori_l_batch, forward_type="sem")
+                scores_nl, latent_variables = model(images_ori_l_batch, forward_type="sem")
 
             assert num_heads == len(scores_nl)
 

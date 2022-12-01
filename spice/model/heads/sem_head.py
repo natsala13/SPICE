@@ -202,7 +202,7 @@ class SemHead(nn.Module):
         return cls_score, latent_variables
 
     def loss(self, x, target, **kwargs):
-        cls_socre = self.forward(x)
+        cls_socre, latent_variables = self.forward(x)
         loss = self.loss_fn_cls(cls_socre, target) * self.loss_weight["loss_cls"]
 
         if self.entropy:
