@@ -95,10 +95,13 @@ class WideResNet(nn.Module):
         out = F.avg_pool2d(out, 8)
         out = out.view(-1, self.nChannels)
         output = self.fc(out)
-        if ood_test:
-            return output, out
-        else:
-            return output
+
+        return output, [out, output]
+
+        # if ood_test:
+        #     return output, out
+        # else:
+        #     return output
         
 class build_WideResNet:
     def __init__(self, depth=28, widen_factor=2, bn_momentum=0.01, leaky_slope=0.0, dropRate=0.0):
